@@ -1,26 +1,175 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbfcf5;
+  --foreground: #1c2a29;
+  --card: #ffffff;
+  --card-foreground: #1c2a29;
+  --popover: #ffffff;
+  --popover-foreground: #1c2a29;
+  --primary: #4e7d7a;
+  --primary-foreground: #fbfcf5;
+  --secondary: #e6e5d9;
+  --secondary-foreground: #1c2a29;
+  --muted: #f0f0e7;
+  --muted-foreground: #6b7c7b;
+  --accent: #cdd6d2;
+  --accent-foreground: #1c2a29;
+  --destructive: #d04f5e;
+  --destructive-foreground: #ffffff;
+  --border: #e3e3dc;
+  --input: #ffffff;
+  --ring: #4e7d7a;
+  --chart-1: #4e7d7a;
+  --chart-2: #8ea69c;
+  --chart-3: #cdd6d2;
+  --chart-4: #a47963;
+  --chart-5: #e6e5d9;
+  --sidebar: #f8f9f1;
+  --sidebar-foreground: #1c2a29;
+  --sidebar-primary: #4e7d7a;
+  --sidebar-primary-foreground: #fbfcf5;
+  --sidebar-accent: #f0f0e7;
+  --sidebar-accent-foreground: #1c2a29;
+  --sidebar-border: #e3e3dc;
+  --sidebar-ring: #4e7d7a;
+  --font-sans: "Noto Sans JP", ui-sans-serif, sans-serif, system-ui;
+  --font-serif: "Tenor Sans", Georgia, serif;
+  --font-mono: "JetBrains Mono", "Courier New", monospace;
+  --radius: 0.4rem;
+  --shadow-x: 0px;
+  --shadow-y: 8px;
+  --shadow-blur: 4px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.05;
+  --shadow-color: #1c2a29;
+  --shadow-2xs: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.03);
+  --shadow-xs: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.03);
+  --shadow-sm: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.05), 0px 1px 2px -1px hsl(175.7143 20% 13.7255% / 0.05);
+  --shadow: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.05), 0px 1px 2px -1px hsl(175.7143 20% 13.7255% / 0.05);
+  --shadow-md: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.05), 0px 2px 4px -1px hsl(175.7143 20% 13.7255% / 0.05);
+  --shadow-lg: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.05), 0px 4px 6px -1px hsl(175.7143 20% 13.7255% / 0.05);
+  --shadow-xl: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.05), 0px 8px 10px -1px hsl(175.7143 20% 13.7255% / 0.05);
+  --shadow-2xl: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.13);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+}
+
+.dark {
+  --background: #0e1312;
+  --foreground: #e9ecec;
+  --card: #151b1a;
+  --card-foreground: #e9ecec;
+  --popover: #151b1a;
+  --popover-foreground: #e9ecec;
+  --primary: #6ea8a3;
+  --primary-foreground: #000000;
+  --secondary: #212d2b;
+  --secondary-foreground: #e9ecec;
+  --muted: #1a2524;
+  --muted-foreground: #93a5a4;
+  --accent: #4a5d5a;
+  --accent-foreground: #e9ecec;
+  --destructive: #f27984;
+  --destructive-foreground: #0e1312;
+  --border: #2c3b3a;
+  --input: #151b1a;
+  --ring: #6ea8a3;
+  --chart-1: #6ea8a3;
+  --chart-2: #a6c7b9;
+  --chart-3: #8c9f9e;
+  --chart-4: #c2a99c;
+  --chart-5: #4e7d7a;
+  --sidebar: #121716;
+  --sidebar-foreground: #e9ecec;
+  --sidebar-primary: #6ea8a3;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1a2524;
+  --sidebar-accent-foreground: #e9ecec;
+  --sidebar-border: #2c3b3a;
+  --sidebar-ring: #6ea8a3;
+  --font-sans: Inter, ui-sans-serif, sans-serif, system-ui;
+  --font-serif: Georgia, serif;
+  --font-mono: JetBrains Mono, ui-monospace, monospace;
+  --radius: 0.625rem;
+  --shadow-x: 0px;
+  --shadow-y: 8px;
+  --shadow-blur: 8px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.4;
+  --shadow-color: #000000;
+  --shadow-2xs: 0px 8px 8px 0px hsl(0 0% 0% / 0.20);
+  --shadow-xs: 0px 8px 8px 0px hsl(0 0% 0% / 0.20);
+  --shadow-sm: 0px 8px 8px 0px hsl(0 0% 0% / 0.40), 0px 1px 2px -1px hsl(0 0% 0% / 0.40);
+  --shadow: 0px 8px 8px 0px hsl(0 0% 0% / 0.40), 0px 1px 2px -1px hsl(0 0% 0% / 0.40);
+  --shadow-md: 0px 8px 8px 0px hsl(0 0% 0% / 0.40), 0px 2px 4px -1px hsl(0 0% 0% / 0.40);
+  --shadow-lg: 0px 8px 8px 0px hsl(0 0% 0% / 0.40), 0px 4px 6px -1px hsl(0 0% 0% / 0.40);
+  --shadow-xl: 0px 8px 8px 0px hsl(0 0% 0% / 0.40), 0px 8px 10px -1px hsl(0 0% 0% / 0.40);
+  --shadow-2xl: 0px 8px 8px 0px hsl(0 0% 0% / 1.00);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
 }
