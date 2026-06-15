@@ -57,6 +57,29 @@
   --shadow-2xl: 0px 8px 4px 0px hsl(175.7143 20% 13.7255% / 0.13);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
+
+    /* clerk */
+  --clerk-color-primary: var(--primary);
+  --clerk-color-primary-foreground: var(--primary-foreground);
+  --clerk-color-danger: var(--destructive);
+  --clerk-color-success: oklch(
+    0.627 0.194 149.21
+  ); /* Keeping a standard success green */
+  --clerk-color-warning: oklch(
+    0.769 0.188 70.08
+  ); /* Keeping a standard warning orange */
+  --clerk-color-neutral: var(--foreground);
+  --clerk-color-foreground: var(--foreground);
+  --clerk-color-background: var(--background);
+  --clerk-color-input: var(--input);
+  --clerk-color-input-foreground: var(--foreground);
+  --clerk-color-ring: var(--ring);
+  --clerk-color-shimmer: var(--background);
+  --clerk-color-modal-backdrop: rgba(0, 0, 0, 0.5);
+  --clerk-border-radius: var(--radius);
+  --clerk-spacing: 1rem;
+  --clerk-color-muted: var(--muted);
+  --clerk-color-muted-foreground: var(--muted-foreground);
 }
 
 .dark {
@@ -110,6 +133,18 @@
   --shadow-lg: 0px 8px 8px 0px hsl(0 0% 0% / 0.40), 0px 4px 6px -1px hsl(0 0% 0% / 0.40);
   --shadow-xl: 0px 8px 8px 0px hsl(0 0% 0% / 0.40), 0px 8px 10px -1px hsl(0 0% 0% / 0.40);
   --shadow-2xl: 0px 8px 8px 0px hsl(0 0% 0% / 1.00);
+
+
+    /* clerk */
+  --clerk-color-primary: var(--primary);
+  --clerk-color-primary-foreground: var(--primary-foreground);
+  --clerk-color-danger: var(--destructive);
+  --clerk-color-neutral: var(--foreground);
+  --clerk-color-foreground: var(--foreground);
+  --clerk-color-background: var(--background);
+  --clerk-color-input: var(--input);
+  --clerk-color-muted: var(--muted);
+  --clerk-color-muted-foreground: var(--muted-foreground);
 }
 
 @theme inline {
