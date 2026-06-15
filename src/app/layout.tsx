@@ -36,7 +36,8 @@ export default function RootLayout({
         geistMono.variable,
         "font-sans",
         inter.variable,
-      )}>
+      )}
+      suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
         <Providers>{children}</Providers>
       </body>
