@@ -1,10 +1,17 @@
 import { adminOnlyProcedure, createTRPCRouter } from "../init";
 import { db } from "@/lib/prisma";
-import { approveVolunteerSchema, rejectVolunteerSchema } from "@/types";
+import {
+  approveVolunteerSchema,
+  rejectVolunteerSchema,
+  updateUserRoleSchema,
+} from "@/types";
 
 export const adminRouter = createTRPCRouter({
-  getVolunteers: adminOnlyProcedure.query(async ({ ctx }) => {
+  getVolunteers: adminOnlyProcedure.query(async () => {
     return await db.volunteer.findMany({
+      where: {
+        status: "PENDING",
+      },
       include: {
         user: true,
       },
@@ -16,7 +23,7 @@ export const adminRouter = createTRPCRouter({
 
   approve: adminOnlyProcedure
     .input(approveVolunteerSchema)
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
       return await db.volunteer.update({
         where: {
           id: input.volunteerId,
@@ -29,7 +36,7 @@ export const adminRouter = createTRPCRouter({
 
   reject: adminOnlyProcedure
     .input(rejectVolunteerSchema)
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ input }) => {
       return await db.volunteer.update({
         where: {
           id: input.volunteerId,
@@ -37,6 +44,45 @@ export const adminRouter = createTRPCRouter({
         data: {
           status: "REJECTED",
           adminNote: input.adminNote,
+        },
+      });
+    }),
+
+  getUsers: adminOnlyProcedure.query(async ({ ctx }) => {
+    return await db.user.findMany({
+      where: {
+        NOT: { clerkId: ctx.userId },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+      select: {
+        id: true,
+        clerkId: true,
+        name: true,
+        email: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+  }),
+
+  updateUserRole: adminOnlyProcedure
+    .input(updateUserRoleSchema)
+    .mutation(async ({ input }) => {
+      return await db.user.update({
+        where: {
+          id: input.userId,
+        },
+        data: {
+          role: input.role,
+        },
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          role: true,
         },
       });
     }),

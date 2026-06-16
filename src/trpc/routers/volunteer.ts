@@ -7,8 +7,6 @@ export const volunteerRouter = createTRPCRouter({
   create: protectedProcedure
     .input(createVolunteerSchema)
     .mutation(async ({ ctx, input }) => {
-      console.log("🚀 ~ ctx:", ctx.userId);
-
       const user = await db.user.findUnique({
         where: {
           clerkId: ctx.userId,

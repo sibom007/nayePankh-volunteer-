@@ -1,6 +1,7 @@
 import { Role } from "@/generated/prisma/enums";
 import {
   GalleryVerticalEndIcon,
+  LucideIcon,
   Settings2Icon,
   ShieldUserIcon,
 } from "lucide-react";
@@ -12,6 +13,7 @@ export const linksInfo = {
     avatar: "/avatars/shadcn.jpg",
     role: Role.VOLUNTEER,
   },
+
   teams: [
     {
       name: "NayePankh Foundation",
@@ -19,17 +21,18 @@ export const linksInfo = {
       plan: "Enterprise",
     },
   ],
+
   Links: [
     {
       title: "Playground",
       url: "/dashboard/volunteer",
       icon: ShieldUserIcon,
-      role: [Role.ADMIN],
       isActive: true,
       items: [
         {
-          title: "Volunteer",
-          url: "/dashboard/volunteer",
+          title: "Applies",
+          url: "/dashboard/admin/applies",
+          role: [Role.ADMIN],
         },
       ],
     },
@@ -37,14 +40,32 @@ export const linksInfo = {
     {
       title: "Settings",
       url: "/dashboard/profile",
-      role: [Role.ADMIN, Role.VOLUNTEER, Role.USER],
       icon: Settings2Icon,
       items: [
         {
           title: "Profile",
           url: "/dashboard/profile",
+          role: [Role.ADMIN, Role.USER, Role.VOLUNTEER],
+        },
+        {
+          title: "Roles",
+          url: "/dashboard/admin/roles",
+          role: [Role.ADMIN],
         },
       ],
     },
   ],
 };
+export interface SidebarSubItem {
+  title: string;
+  url: string;
+  role: Role[];
+}
+
+export interface SidebarItem {
+  title: string;
+  url: string;
+  icon?: LucideIcon;
+  isActive?: boolean;
+  items?: SidebarSubItem[];
+}
