@@ -1,4 +1,3 @@
-
 import { createTRPCRouter, baseProcedure, protectedProcedure } from "../init";
 import { db } from "@/lib/prisma";
 import { TRPCError } from "@trpc/server";
@@ -7,7 +6,7 @@ import { createUserSchema, updateUserSchema } from "@/types";
 export const userRouter = createTRPCRouter({
   create: baseProcedure
     .input(createUserSchema)
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({  input }) => {
       const exUser = await db.user.findFirst({
         where: { email: input.email },
       });
@@ -28,12 +27,9 @@ export const userRouter = createTRPCRouter({
     }),
 
   me: protectedProcedure.query(async ({ ctx }) => {
-    console.log("🚀 ~ ctx:", ctx.userId)
-    
     const user = await db.user.findUnique({
       where: { clerkId: ctx.userId },
     });
-    console.log("🚀 ~ user:", user);
 
     if (!user) {
       throw new TRPCError({ code: "NOT_FOUND", message: "user not found" });

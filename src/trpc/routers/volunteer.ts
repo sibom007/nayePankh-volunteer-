@@ -33,9 +33,22 @@ export const volunteerRouter = createTRPCRouter({
     }),
 
   getMyApplication: protectedProcedure.query(async ({ ctx }) => {
+    const user = await db.user.findUnique({
+      where: {
+        clerkId: ctx.userId,
+      },
+    });
+
+    if (!user) {
+      throw new TRPCError({
+        code: "NOT_FOUND",
+        message: "User not found",
+      });
+    }
+
     return await db.volunteer.findUnique({
       where: {
-        userId: ctx.userId,
+        userId: user.id,
       },
     });
   }),

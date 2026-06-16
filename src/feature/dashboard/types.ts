@@ -34,6 +34,11 @@ export const linksInfo = {
           url: "/dashboard/admin/applies",
           role: [Role.ADMIN],
         },
+        {
+          title: "Own Applies",
+          url: "/dashboard/volunteer/own-applies",
+          role: [Role.VOLUNTEER],
+        },
       ],
     },
 

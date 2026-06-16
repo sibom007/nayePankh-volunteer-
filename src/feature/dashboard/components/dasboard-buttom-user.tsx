@@ -147,7 +147,7 @@ export function DashboardButtomUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive" asChild>
+            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive w-full">
               <LogOut className="size-4" />
               <SignOutButton />
             </DropdownMenuItem>
