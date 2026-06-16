@@ -71,7 +71,9 @@ export function Header() {
             <Spinner />
           ) : isSignedIn ? (
             <div className="gap-2 flex">
-              <Button>Dashboard</Button>
+              <Button>
+                <Link href={"/dashboard"}>Dashboard</Link>
+              </Button>
               <Button variant={"destructive"} asChild>
                 <SignOutButton />
               </Button>

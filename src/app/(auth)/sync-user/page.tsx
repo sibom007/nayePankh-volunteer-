@@ -13,7 +13,7 @@ export default function Page() {
   const router = useRouter();
   const trpc = useTRPC();
 
-  // Prevents double-syncing in Strict Mode
+  // Prevents double-syncing in React Strict Mode
   const hasAttemptedSync = useRef(false);
 
   // Clean initialization keeping it pure from side-effects during render
@@ -29,14 +29,7 @@ export default function Page() {
       return;
     }
 
-    // 3. Optimization Guard: Skip database sync if already flag-synced locally
-    const hasSynced = localStorage.getItem("is_synced");
-    if (hasSynced) {
-      router.replace("/");
-      return;
-    }
-
-    // 4. Atomic Sync Trigger: Executes exactly once
+    // 3. Atomic Sync Trigger: Executes exactly once per mount context
     if (!hasAttemptedSync.current) {
       hasAttemptedSync.current = true;
 
@@ -48,7 +41,6 @@ export default function Page() {
         },
         {
           onSuccess: () => {
-            localStorage.setItem("is_synced", "true");
             router.replace("/");
           },
           onError: (error) => {
