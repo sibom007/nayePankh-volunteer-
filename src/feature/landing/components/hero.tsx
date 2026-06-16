@@ -57,7 +57,7 @@ export function Hero() {
           variants={itemVariants}
           className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
           It&apos;s That Easy to Bring a
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-accent">
             {" "}
             Smile
           </span>
@@ -78,9 +78,13 @@ export function Hero() {
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 group">
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 group"
+              icon={
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              }
+              iconPosition="end"
+              >
               Donate Now
-              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             </Button>
           </motion.div>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

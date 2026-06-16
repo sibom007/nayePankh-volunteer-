@@ -26,6 +26,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { UserAvatar } from "@/lib/user-avatar";
+import { SignOutButton } from "@clerk/nextjs";
 
 export function DashboardButtomUser({
   user,
@@ -39,7 +40,6 @@ export function DashboardButtomUser({
   console.log(user);
   const { isMobile } = useSidebar();
 
-  // 👈 Fix 2: Render a shell skeleton or return null if user data hasn't arrived yet
   if (!user) {
     return (
       <SidebarMenu>
@@ -147,9 +147,9 @@ export function DashboardButtomUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
+            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive" asChild>
               <LogOut className="size-4" />
-              Log out
+              <SignOutButton />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
