@@ -218,8 +218,8 @@ Create a `.env` file in the project root (same level as `package.json`).
 DATABASE_URL="mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority"
 
 # Clerk authentication (required)
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxxxxxxxxxx
-CLERK_SECRET_KEY=sk_test_xxxxxxxxxxxxxxxxxxxxxxxx
+CLERK_SECRET_KEY=<your-clerk-secret-key-from-dashboard>
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=<your-clerk-publishable-key>
 
 # Optional Clerk route overrides (defaults work for most setups)
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
