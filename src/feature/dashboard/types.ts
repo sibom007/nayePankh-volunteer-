@@ -37,7 +37,7 @@ export const linksInfo = {
         {
           title: "Own Applies",
           url: "/dashboard/volunteer/own-applies",
-          role: [Role.VOLUNTEER],
+          role: [Role.VOLUNTEER, Role.USER],
         },
       ],
     },
