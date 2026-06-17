@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && bunx prisma generate",
+    "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
     "start": "next start",
-    "postinstall": "bunx prisma generate",
     "lint": "eslint"
   },
   "dependencies": {
