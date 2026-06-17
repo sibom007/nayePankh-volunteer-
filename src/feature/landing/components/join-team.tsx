@@ -1,130 +1,182 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function JoinTeam() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.2,
+  });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+
+  const opportunities = [
+    {
+      title: "Volunteer",
+      description:
+        "Contribute your time and skills to support children and families.",
+      icon: "🙋",
     },
-  };
+    {
+      title: "Donate",
+      description: "Help fund education, healthcare and community programs.",
+      icon: "💝",
+    },
+    {
+      title: "Partner",
+      description: "Collaborate with us to create greater social impact.",
+      icon: "🤝",
+    },
+  ];
 
   return (
-    <section id="join" className="py-20 sm:py-32">
-      <motion.div
-        ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-2">
+    <section
+      id="join"
+      ref={ref}
+      className="relative overflow-hidden py-24 lg:py-32">
+      {/* Parallax Background */}
+      <motion.div style={{ y: backgroundY }} className="absolute inset-0">
+        <Image
+          src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/YKbL494Mv8Ip3qgy/whatsapp-image-2023-02-05-at-9.13.05-am-AzGEo7LOeZi2gn9v.jpeg"
+          alt="Join NayePankh"
+          fill
+          sizes=""
+          className="object-cover scale-110"
+        />
+
+        <div className="absolute inset-0 bg-black/70" />
+
+        <div className="absolute inset-0 bg-linear-to-b from-background/40 via-black/30 to-background" />
+      </motion.div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={
+            isInView
+              ? {
+                  opacity: 1,
+                  y: 0,
+                }
+              : {}
+          }
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16">
+          <p className="text-primary font-semibold uppercase tracking-[0.3em] text-sm">
             Join Our Team
           </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Make a Real Difference
+
+          <h2 className="mt-4 text-4xl md:text-5xl lg:text-6xl font-black text-white">
+            Make A Real
+            <br />
+            Difference
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Whether you&apos;re passionate about education, healthcare, or
-            community support, there&apos;s a place for you in our organization.
-            Join us and be part of an organization making real impact, one
-            person at a time.
+
+          <p className="mt-6 max-w-3xl mx-auto text-lg text-white/80 leading-8">
+            Become part of a movement dedicated to education, healthcare and
+            community development. Every volunteer, donor and partner helps
+            create lasting impact.
           </p>
         </motion.div>
 
-        {/* Opportunities Grid */}
-        <motion.div
-          variants={itemVariants}
-          className="grid md:grid-cols-3 gap-8 mb-16">
-          {[
-            {
-              title: "Volunteer",
-              description:
-                "Contribute your time and energy to help those in need.",
-              icon: "🙋",
-            },
-            {
-              title: "Donate",
-              description:
-                "Your financial support creates lasting change in communities.",
-              icon: "💝",
-            },
-            {
-              title: "Partner With Us",
-              description: "Collaborate with us to amplify our social impact.",
-              icon: "🤝",
-            },
-          ].map((opportunity, i) => (
+        {/* Glass Cards */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {opportunities.map((item, index) => (
             <motion.div
-              key={i}
-              whileHover={{ y: -8, borderColor: "var(--primary)" }}
-              className="p-8 rounded-xl border border-border bg-background hover:shadow-lg transition-all cursor-pointer">
-              <p className="text-5xl mb-4">{opportunity.icon}</p>
-              <h3 className="text-xl font-bold text-foreground mb-2">
-                {opportunity.title}
+              key={item.title}
+              initial={{
+                opacity: 0,
+                y: 40,
+              }}
+              animate={
+                isInView
+                  ? {
+                      opacity: 1,
+                      y: 0,
+                    }
+                  : {}
+              }
+              transition={{
+                duration: 0.5,
+                delay: index * 0.15,
+              }}
+              whileHover={{
+                y: -8,
+              }}
+              className="rounded-3xl border border-white/10 bg-white/10 backdrop-blur-xl p-8">
+              <div className="text-5xl mb-5">{item.icon}</div>
+
+              <h3 className="text-2xl font-bold text-white mb-3">
+                {item.title}
               </h3>
-              <p className="text-muted-foreground mb-4">
-                {opportunity.description}
-              </p>
-              <button className="text-primary font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all">
+
+              <p className="text-white/70 leading-7">{item.description}</p>
+
+              <button className="mt-6 inline-flex items-center gap-2 text-primary font-semibold">
                 Learn More
                 <ArrowRight className="w-4 h-4" />
               </button>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        {/* CTA Section */}
+        {/* Main CTA */}
         <motion.div
-          variants={itemVariants}
-          className="relative rounded-2xl bg-gradient-to-r from-primary/20 to-accent/20 p-12 sm:p-16 border border-primary/20 overflow-hidden">
-          {/* Background Animation */}
-          <motion.div
-            animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 blur-3xl"
-          />
+          initial={{
+            opacity: 0,
+            scale: 0.95,
+          }}
+          animate={
+            isInView
+              ? {
+                  opacity: 1,
+                  scale: 1,
+                }
+              : {}
+          }
+          transition={{
+            duration: 0.6,
+            delay: 0.3,
+          }}
+          className="rounded-4xl border border-white/10 bg-white/10 backdrop-blur-xl p-10 md:p-16 text-center">
+          <h3 className="text-3xl md:text-5xl font-black text-white">
+            Ready To Join
+            <br />
+            Our Mission?
+          </h3>
 
-          <div className="relative text-center">
-            <h3 className="text-3xl sm:text-4xl font-bold text-foreground mb-4">
-              Ready to Join Our Mission?
-            </h3>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join hundreds of volunteers making a positive impact in
-              communities across India.
-            </p>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 group">
-                Join Us Today
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </motion.div>
+          <p className="max-w-2xl mx-auto mt-6 text-white/80 text-lg leading-8">
+            Join hundreds of volunteers working to create brighter futures and
+            stronger communities across India.
+          </p>
+
+          <div className="flex flex-wrap justify-center gap-4 mt-10">
+            <Button size="lg" className="group" asChild>
+              <Link href="/volunteer">
+                Become A Volunteer
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+
+            <Button size="lg" variant="secondary" asChild>
+              <Link href="/donate">Donate Today</Link>
+            </Button>
           </div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

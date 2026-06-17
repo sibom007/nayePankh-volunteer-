@@ -4,116 +4,74 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { useTRPC } from "@/trpc/client";
-import { useMutation } from "@tanstack/react-query";
+import Image from "next/image";
 
 export function Hero() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-
-
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
-      {/* Background gradient */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl opacity-20" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl opacity-20" />
+    <section id="home" className="relative min-h-screen flex items-center">
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <Image
+          src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=1920,fit=crop/YKbL494Mv8Ip3qgy/whatsapp-image-2023-01-31-at-9.40.45-pm-dWxpDb2pNbCaxERZ.jpeg"
+          alt=""
+          className="w-full h-full object-cover"
+          fill
+          sizes=""
+          priority
+        />
+
+        <div className="absolute inset-0 bg-black/55" />
       </div>
 
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Badge */}
-        <motion.div variants={itemVariants} className="mb-6">
-          <span className="inline-block px-4 py-1.5 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20">
-            UP Govt. | 80G & 12A Registered NGO
-          </span>
-        </motion.div>
-
-        {/* Heading */}
-        <motion.h1
-          variants={itemVariants}
-          className="text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-          It&apos;s That Easy to Bring a
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-primary to-accent">
-            {" "}
-            Smile
-          </span>
-        </motion.h1>
-
-        {/* Description */}
-        <motion.p
-          variants={itemVariants}
-          className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Join us in our mission to uplift underprivileged communities. Every
-          contribution matters—whether it&apos;s your time, skills, or support.
-        </motion.p>
-
-        {/* CTA Buttons */}
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
         <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              size="lg"
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 group"
-              icon={
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              }
-              iconPosition="end"
-              >
+          initial={{ opacity: 0, y: 60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="max-w-4xl">
+          <h1 className="text-white text-6xl md:text-7xl lg:text-8xl font-black leading-none mt-32">
+            Bring a<span className="block text-primary">Smile</span>
+            To Every Child
+          </h1>
+
+          <p className="mt-8 text-xl text-white/80 max-w-2xl">
+            Empowering underprivileged communities through education, healthcare
+            and youth-led social impact.
+          </p>
+
+          <div className="flex flex-wrap gap-4 mt-10">
+            <Button size="lg" className="h-14 px-8 text-base">
               Donate Now
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-border text-foreground hover:bg-secondary font-semibold px-8"
-              asChild>
-              <Link href={"volunteer"}>Be a volunteer</Link>
-            </Button>
-          </motion.div>
-        </motion.div>
 
-        {/* Stats */}
-        <motion.div
-          variants={itemVariants}
-          className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
-          {[
-            { label: "Lives Touched", value: "5000+" },
-            { label: "Active Members", value: "200+" },
-            { label: "Cities", value: "3+" },
-          ].map((stat, i) => (
-            <motion.div key={i} whileHover={{ y: -5 }} className="p-4">
-              <p className="text-3xl font-bold text-primary">{stat.value}</p>
-              <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
-            </motion.div>
-          ))}
+            <Button size="lg" variant="secondary" asChild className="h-14 px-8">
+              <Link href="/volunteer">Become a Volunteer</Link>
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-3 gap-10 mt-20 max-w-2xl">
+            <div>
+              <h3 className="text-4xl font-bold text-white">5000+</h3>
+              <p className="text-white/70 mt-2">Lives Impacted</p>
+            </div>
+
+            <div>
+              <h3 className="text-4xl font-bold text-white">200+</h3>
+              <p className="text-white/70 mt-2">Volunteers</p>
+            </div>
+
+            <div>
+              <h3 className="text-4xl font-bold text-white">3+</h3>
+              <p className="text-white/70 mt-2">Cities</p>
+            </div>
+          </div>
         </motion.div>
-      </motion.div>
+      </div>
+
+      {/* Bottom Fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-linear-to-t from-background/70 via-background/20 to-transparent" />
     </section>
   );
 }

@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { useTRPC } from "@/trpc/client";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import {
   AlertCircle,
   CalendarDays,
@@ -13,18 +13,20 @@ import {
   Phone,
   ShieldCheck,
 } from "lucide-react";
-import VolunteerApplicationEmpty from "./volunteer-application-empty";
+import { VolunteerApplicationEmpty } from "./volunteer-application-empty";
+import { VolunteerApplicationLoading } from "@/feature/dashboard/own-applies/components/volunteer-application-loading";
 
 export function VolunteerApplication() {
   const trpc = useTRPC();
 
-  const { data } = useSuspenseQuery(
+  const { data, isLoading } = useQuery(
     trpc.volunteer.getMyApplication.queryOptions(),
   );
 
   if (!data) {
     return <VolunteerApplicationEmpty />;
   }
+  if (isLoading) return <VolunteerApplicationLoading />;
 
   const statusVariant =
     data.status === "APPROVED"

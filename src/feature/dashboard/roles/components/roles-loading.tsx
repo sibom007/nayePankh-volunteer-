@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export default function RolesLoading() {
+export function RolesLoading() {
   return (
     <div className="space-y-4 p-6">
       <Skeleton className="h-8 w-52" />

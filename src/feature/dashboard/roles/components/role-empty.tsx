@@ -1,6 +1,6 @@
 import { Users } from "lucide-react";
 
-export default function RolesEmpty() {
+export  function RolesEmpty() {
   return (
     <div className="flex min-h-100 flex-col items-center justify-center gap-4">
       <Users className="text-muted-foreground h-12 w-12" />

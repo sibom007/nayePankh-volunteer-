@@ -109,7 +109,7 @@ export const VolunteerForm = () => {
   };
 
   return (
-    <div className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-4xl items-center justify-center px-4 py-6">
+    <div className="container mx-auto flex min-h-[calc(100vh-4rem)] max-w-4xl items-center justify-center px-4 py-6 mt-14">
       {/* Reduced outer container max-width to max-w-4xl for a tighter, compact grid layout */}
       <Card className="grid w-full grid-cols-1 overflow-hidden border bg-card shadow-lg md:grid-cols-12 md:min-h-120 mt-0 pt-0 pb-0">
         {/* Left Side Cover Image Panel */}

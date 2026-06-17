@@ -2,14 +2,18 @@
 
 import { useTRPC } from "@/trpc/client";
 import { ApplicationCard } from "./application-card";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { FileSearch2 } from "lucide-react";
+import { AppliesLoading } from "./applies-loading";
+import { AppliesError } from "./applies-error";
 
 export const AppliesList = () => {
   const trpc = useTRPC();
-  const applications = useSuspenseQuery(
-    trpc.admin.getVolunteers.queryOptions(),
-  );
+  const applications = useQuery(trpc.admin.getVolunteers.queryOptions());
+
+  if (applications.error) return <AppliesError />;
+  if (applications.isLoading) return <AppliesLoading />;
+  const data = applications.data || [];
 
   return (
     <div className="min-h-screen ">
@@ -22,7 +26,7 @@ export const AppliesList = () => {
           </p>
         </div>
 
-        {applications.data.length === 0 ? (
+        {data.length === 0 ? (
           <div className="flex min-h-100 flex-col items-center justify-center rounded-2xl border border-dashed bg-muted/40 p-8 text-center">
             <div className="mb-4 rounded-full bg-muted p-4">
               <FileSearch2 className="size-8 text-muted-foreground" />
@@ -37,7 +41,7 @@ export const AppliesList = () => {
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {applications.data.map((application) => (
+            {data.map((application) => (
               <ApplicationCard key={application.id} application={application} />
             ))}
           </div>

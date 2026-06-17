@@ -1,165 +1,186 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Rss, Play, Send } from "lucide-react";
+import Link from "next/link";
+import { Mail, Phone, MapPin } from "lucide-react";
+import { FiInstagram, FiFacebook, FiYoutube, FiLinkedin } from "react-icons/fi";
 
 export function Footer() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer id="contact" className="bg-card border-t border-border ">
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        {/* Main Footer Content */}
-        <div className="grid md:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <motion.div variants={itemVariants}>
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-primary-foreground font-bold">
-                NP
-              </div>
-              <div>
-                <p className="font-bold text-foreground">NayePankh</p>
-                <p className="text-xs text-muted-foreground">Foundation</p>
-              </div>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Making a difference in communities across India through education,
-              healthcare, and sustainable development.
+    <footer id="contact" className="border-t bg-background">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        {/* Top */}
+        <div className="grid lg:grid-cols-[1.2fr_1fr] gap-16">
+          {/* Left */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}>
+            <p className="text-primary uppercase tracking-[0.35em] text-sm font-semibold">
+              Contact Us
             </p>
-          </motion.div>
 
-          {/* Quick Links */}
-          <motion.div variants={itemVariants}>
-            <h4 className="font-bold text-foreground mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              {["Home", "About Us", "Join Us", "Donate"].map((link) => (
-                <li key={link}>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            <h2 className="mt-4 text-5xl md:text-6xl font-black leading-none">
+              Get in Touch
+            </h2>
 
-          {/* Programs */}
-          <motion.div variants={itemVariants}>
-            <h4 className="font-bold text-foreground mb-4">Our Programs</h4>
-            <ul className="space-y-2">
-              {[
-                "Education",
-                "Healthcare",
-                "Community Support",
-                "Disaster Relief",
-              ].map((program) => (
-                <li key={program}>
-                  <a
-                    href="#"
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    {program}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
+            <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-8">
+              Join us in creating positive change through education, healthcare,
+              community support and youth empowerment initiatives.
+            </p>
 
-          {/* Contact */}
-          <motion.div variants={itemVariants}>
-            <h4 className="font-bold text-foreground mb-4">Get in Touch</h4>
-            <div className="space-y-3">
+            <div className="mt-10 space-y-4">
               <a
                 href="mailto:contact@nayepankh.com"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group">
-                <Mail className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                className="flex items-center gap-3 text-lg text-muted-foreground hover:text-primary transition-colors">
+                <Mail className="size-5" />
                 contact@nayepankh.com
               </a>
+
               <a
                 href="tel:+918318500748"
-                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group">
-                <Phone className="w-4 h-4 group-hover:scale-110 transition-transform" />
-                +91 8318 500 748
+                className="flex items-center gap-3 text-lg text-muted-foreground hover:text-primary transition-colors">
+                <Phone className="size-5" />
+                +91 8318500748
               </a>
-              <div className="flex items-start gap-2 text-sm text-muted-foreground">
-                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span>Kanpur, Ghaziabad, India</span>
+
+              <div className="flex items-center gap-3 text-lg text-muted-foreground">
+                <MapPin className="size-5" />
+                Kanpur, Uttar Pradesh, India
+              </div>
+            </div>
+
+            {/* Social */}
+            <div className="mt-10">
+              <p className="uppercase tracking-[0.35em] text-sm font-semibold mb-5">
+                Follow Us
+              </p>
+
+              <div className="flex gap-2 mb-3">
+                {[FiInstagram, FiLinkedin, FiYoutube, FiFacebook].map(
+                  (Icon, index) => (
+                    <motion.a
+                      key={index}
+                      href="#"
+                      whileHover={{
+                        y: -3,
+                      }}
+                      className="h-11 w-11 rounded-xl border flex items-center justify-center hover:border-primary hover:text-primary transition-all">
+                      <Icon className="size-5" />
+                    </motion.a>
+                  ),
+                )}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 gap-3">
+            {/* Quick Links */}
+            <div>
+              <h3 className="font-bold text-lg mb-5">Quick Links</h3>
+
+              <div className="space-y-3">
+                <Link
+                  href="/"
+                  className="block text-muted-foreground hover:text-primary">
+                  Home
+                </Link>
+
+                <Link
+                  href="#about"
+                  className="block text-muted-foreground hover:text-primary">
+                  About Us
+                </Link>
+
+                <Link
+                  href="/volunteer"
+                  className="block text-muted-foreground hover:text-primary">
+                  Volunteer
+                </Link>
+
+                <Link
+                  href="#impact"
+                  className="block text-muted-foreground hover:text-primary">
+                  Impact Stories
+                </Link>
+              </div>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h3 className="font-bold text-lg mb-5">Information</h3>
+
+              <div className="space-y-3">
+                <Link
+                  href="/terms"
+                  className="block text-muted-foreground hover:text-primary">
+                  Terms & Conditions
+                </Link>
+
+                <Link
+                  href="/privacy-policy"
+                  className="block text-muted-foreground hover:text-primary">
+                  Privacy Policy
+                </Link>
+
+                <Link
+                  href="/refund-policy"
+                  className="block text-muted-foreground hover:text-primary">
+                  Refund Policy
+                </Link>
+
+                <Link
+                  href="/certificates"
+                  className="block text-muted-foreground hover:text-primary">
+                  NGO Certificates
+                </Link>
+              </div>
+            </div>
+
+            {/* NGO Info */}
+            <div className="sm:col-span-2">
+              <div className="rounded-2xl border bg-muted/30 p-6">
+                <h4 className="font-bold mb-3">NayePankh Foundation</h4>
+
+                <div className="grid sm:grid-cols-3 gap-4 text-sm text-muted-foreground">
+                  <div>
+                    <p className="font-medium text-foreground">Registration</p>
+                    <p>80G Certified</p>
+                  </div>
+
+                  <div>
+                    <p className="font-medium text-foreground">Tax Benefits</p>
+                    <p>12A Registered</p>
+                  </div>
+
+                  <div>
+                    <p className="font-medium text-foreground">Community</p>
+                    <p>200+ Active Volunteers</p>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-border my-8" />
-
-        {/* Bottom Section */}
-        <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row justify-between items-center gap-6">
-          {/* Copyright */}
+        {/* Bottom */}
+        <div className=" pt-5 border-t flex flex-col md:flex-row justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             © {currentYear} NayePankh Foundation. All rights reserved.
           </p>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-4">
-            {[
-              { icon: Rss, label: "Instagram", href: "#" },
-              { icon: Send, label: "LinkedIn", href: "#" },
-              { icon: Play, label: "YouTube", href: "#" },
-              { icon: Send, label: "Twitter", href: "#" },
-            ].map(({ icon: Icon, label, href }) => (
-              <motion.a
-                key={label}
-                href={href}
-                aria-label={label}
-                whileHover={{ scale: 1.1, color: "var(--primary)" }}
-                whileTap={{ scale: 0.95 }}
-                className="p-2 rounded-lg bg-secondary hover:bg-primary/20 text-foreground hover:text-primary transition-colors">
-                <Icon className="w-4 h-4" />
-              </motion.a>
-            ))}
-          </div>
-
-          {/* Legal Links */}
-          <div className="flex items-center gap-6">
-            <a
-              href="#"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="text-sm text-muted-foreground hover:text-primary transition-colors">
-              Terms of Service
-            </a>
-          </div>
-        </motion.div>
-      </motion.div>
+          <p className="text-sm text-muted-foreground">
+            Made with dedication for social impact.
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }

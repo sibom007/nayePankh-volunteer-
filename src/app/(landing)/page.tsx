@@ -6,8 +6,7 @@ import { Testimonials } from "@/feature/landing/components/testimonials";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      
+    <main className="min-h-screen overflow-hidden">
       <Hero />
       <About />
       <JoinTeam />

@@ -1,161 +1,176 @@
 "use client";
 
-import { motion } from "motion/react";
-import { Button } from "@/components/ui/button";
-import { useInView } from "motion/react";
 import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function About() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.2,
+  });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
+  const stats = [
+    {
+      value: "5000+",
+      label: "Lives Impacted",
     },
-  };
+    {
+      value: "200+",
+      label: "Volunteers",
+    },
+    {
+      value: "10+",
+      label: "Programs",
+    },
+    {
+      value: "3+",
+      label: "Cities",
+    },
+  ];
 
   return (
-    <section id="about" className="py-20 sm:py-32 bg-secondary/30">
+    <section
+      id="about"
+      className="py-24 lg:py-32 bg-linear-to-b from-background to-secondary/20">
       <motion.div
         ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div variants={itemVariants} className="text-center mb-16">
-          <p className="text-primary font-semibold text-sm tracking-wide uppercase mb-2">
-            About Us
-          </p>
-          <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-4">
-            Think Global, Act Local
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            NayePankh Foundation is India&apos;s largest student-led NGO
-            dedicated to creating positive change in society.
-          </p>
-        </motion.div>
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-16 items-center">
+          {/* Image Section */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            animate={
+              isInView
+                ? {
+                    opacity: 1,
+                    x: 0,
+                  }
+                : {}
+            }
+            transition={{ duration: 0.7 }}
+            className="relative">
+            <div className="relative overflow-hidden rounded-3xl shadow-2xl">
+              <Image
+                src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,h=1045,fit=crop/YKbL494Mv8Ip3qgy/whatsapp-image-2023-02-05-at-9.13.03-am-YBgL64ZLPPI03WXe.jpeg"
+                alt="NayePankh Foundation"
+                width={900}
+                height={1200}
+                sizes=""
+                className="w-full h-125 lg:h-195 object-cover"
+              />
 
-        {/* Content Grid */}
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            <div>
-              <h3 className="text-2xl font-bold text-foreground mb-3">
-                Our Mission
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                We are committed to empowering underprivileged communities
-                through education, healthcare, and sustainable development. Our
-                organization operates across Kanpur, Ghaziabad, and other
-                cities, touching thousands of lives every year.
+              <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/10 to-transparent" />
+            </div>
+
+            {/* Floating NGO Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={
+                isInView
+                  ? {
+                      opacity: 1,
+                      y: 0,
+                    }
+                  : {}
+              }
+              transition={{
+                duration: 0.6,
+                delay: 0.3,
+              }}
+              className="absolute -bottom-5 right-5 bg-background/90 backdrop-blur-xl border border-border rounded-2xl px-5 py-4 shadow-xl">
+              <p className="text-2xl font-bold text-primary">80G & 12A</p>
+
+              <p className="text-xs text-muted-foreground">Registered NGO</p>
+            </motion.div>
+          </motion.div>
+
+          {/* Content Section */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={
+              isInView
+                ? {
+                    opacity: 1,
+                    x: 0,
+                  }
+                : {}
+            }
+            transition={{ duration: 0.7 }}
+            className="max-w-xl">
+            <p className="text-primary uppercase tracking-[0.35em] font-semibold text-xs">
+              About Us
+            </p>
+
+            <h2 className="mt-4 text-3xl md:text-4xl lg:text-5xl font-bold leading-[1.05]">
+              Think Global,
+              <br />
+              Act Local.
+            </h2>
+
+            <div className="mt-6 space-y-4 text-muted-foreground text-base leading-7">
+              <p>
+                NayePankh Foundation is a student-led non-governmental
+                organization dedicated to empowering underprivileged communities
+                through education, healthcare, social welfare and youth
+                development initiatives.
+              </p>
+
+              <p>
+                Our mission is to create sustainable change by connecting
+                passionate volunteers with meaningful opportunities to serve
+                society and uplift those who need support the most.
+              </p>
+
+              <p>
+                Together, we believe that even the smallest act of kindness can
+                create a lasting impact and help build a better future for
+                everyone.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { title: "Founded", value: "2020" },
-                { title: "Members", value: "200+" },
-                { title: "Beneficiaries", value: "5000+" },
-                { title: "Programs", value: "10+" },
-              ].map((item, i) => (
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-3 mt-8">
+              {stats.map((item) => (
                 <motion.div
-                  key={i}
-                  whileHover={{ y: -5 }}
-                  className="bg-background p-4 rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-1">
-                    {item.title}
-                  </p>
+                  key={item.label}
+                  whileHover={{
+                    y: -4,
+                  }}
+                  className="rounded-xl border border-border bg-background/70 backdrop-blur p-4">
                   <p className="text-2xl font-bold text-primary">
                     {item.value}
+                  </p>
+
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {item.label}
                   </p>
                 </motion.div>
               ))}
             </div>
 
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
-                Learn Our Story
+            {/* Buttons */}
+            <div className="flex flex-wrap gap-3 mt-8">
+              <Button asChild className="group">
+                <Link href="/about">
+                  Learn More
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
-            </motion.div>
-          </motion.div>
 
-          {/* Right Image Section */}
-          <motion.div
-            variants={itemVariants}
-            className="relative h-96 bg-gradient-to-br from-primary/20 to-accent/20 rounded-2xl overflow-hidden border border-border">
-            <motion.div
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute inset-0 flex items-center justify-center">
-              <div className="w-32 h-32 bg-primary/30 rounded-full blur-2xl" />
-            </motion.div>
-            <div className="absolute inset-0 flex items-center justify-center text-primary/30 text-center px-6">
-              <div>
-                <p className="text-5xl font-bold mb-2">✨</p>
-                <p className="text-lg font-semibold">
-                  Making a Difference Daily
-                </p>
-              </div>
+              <Button variant="outline" asChild>
+                <Link href="/certificates">Our Certificates</Link>
+              </Button>
             </div>
           </motion.div>
         </div>
-
-        {/* Values Section */}
-        <motion.div variants={itemVariants} className="mt-20">
-          <h3 className="text-2xl font-bold text-foreground text-center mb-12">
-            Our Core Values
-          </h3>
-          <div className="grid md:grid-cols-4 gap-6">
-            {[
-              {
-                icon: "🤝",
-                title: "Integrity",
-                desc: "Honest and transparent in all our actions",
-              },
-              {
-                icon: "💡",
-                title: "Innovation",
-                desc: "Creative solutions for social challenges",
-              },
-              {
-                icon: "❤️",
-                title: "Compassion",
-                desc: "Empathy towards those we serve",
-              },
-              {
-                icon: "🌱",
-                title: "Sustainability",
-                desc: "Long-term positive impact",
-              },
-            ].map((value, i) => (
-              <motion.div
-                key={i}
-                whileHover={{ y: -8 }}
-                className="p-6 rounded-lg bg-background border border-border text-center hover:border-primary/50 transition-colors">
-                <p className="text-4xl mb-3">{value.icon}</p>
-                <h4 className="font-bold text-foreground mb-2">
-                  {value.title}
-                </h4>
-                <p className="text-sm text-muted-foreground">{value.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </motion.div>
     </section>
   );

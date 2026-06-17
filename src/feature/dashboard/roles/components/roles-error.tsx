@@ -2,7 +2,7 @@
 
 import { AlertTriangle } from "lucide-react";
 
-export default function RolesError() {
+export  function RolesError() {
   return (
     <div className="flex min-h-100 flex-col items-center justify-center gap-4">
       <AlertTriangle className="text-destructive h-10 w-10" />

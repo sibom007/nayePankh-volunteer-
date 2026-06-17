@@ -3,7 +3,7 @@ import { FileText } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-export default function VolunteerApplicationEmpty() {
+export  function VolunteerApplicationEmpty() {
   return (
     <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
       <div className="bg-muted mb-6 rounded-full p-4">
